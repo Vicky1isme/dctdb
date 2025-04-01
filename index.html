@@ -6,8 +6,25 @@
     <title>AR.js 多標記 GLB 測試</title>
     <script src="https://aframe.io/releases/1.5.0/aframe.min.js"></script>
     <script src="https://cdn.jsdelivr.net/gh/AR-js-org/AR.js/aframe/build/aframe-ar.min.js"></script>
+    <style>
+        #hint-box {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(0, 0, 0, 0.7);
+            color: white;
+            padding: 15px 20px;
+            border-radius: 10px;
+            font-size: 18px;
+            text-align: center;
+            z-index: 999;
+        }
+    </style>
 </head>
 <body style="margin: 0; overflow: hidden;">
+    <div id="hint-box">掃描看看桌上的圖案吧！</div>
+
     <a-scene embedded arjs>
         <!-- 第一個標記 -->
         <a-marker type="pattern" url="./static/pattern-1.patt">
@@ -68,6 +85,9 @@
     </a-scene>
 
     <script>
+        document.body.addEventListener('click', function () {
+            document.getElementById('hint-box').style.display = 'none';
+        });
         AFRAME.registerComponent('gesture-handler', {
             init: function () {
                 this.previousX = null;  
